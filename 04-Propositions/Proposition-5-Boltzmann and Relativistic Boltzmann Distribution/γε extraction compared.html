@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>γε extraction compared</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: clinical, journal-article; the maths is the content
+   IDEA: a worked paper with live figures in the margin of the argument
+   PICTURE: the three-case weight curve, large, driven by x = mv²/mc²
+   COLOUR and TYPE: white/ink, ultramarine = your γε model, vermilion = ε / standard SR; Spectral + Inter
+   LAYOUT: one reading column, figures break wide, controls sticky above them */
+:root{color-scheme:light dark;--bg:light-dark(#fff,#0d0e18);--ink:light-dark(#14110f,#e8e8ef);--mute:light-dark(#5d6270,#9aa0b2);--rule:light-dark(#e3e5ea,#262a3a);--a:light-dark(#1d2bd8,#7d88ff);--b:light-dark(#d9480f,#ff8a5c);--c:light-dark(#14110f,#e8e8ef);--card:light-dark(#f5f6f9,#151827)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px);max-width:1100px;margin:0 auto}
+h1,h2{font-family:Spectral,Georgia,serif;font-weight:500;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(30px,4.4vw,46px);margin:0 0 14px}h2{font-size:28px;margin:44px 0 10px}
+p{max-width:68ch}.lede{font-size:17px;color:var(--mute)}
+.eq{font-family:Spectral,Georgia,serif;font-size:19px;margin:8px 0;white-space:nowrap;overflow-x:auto}
+.eq i{font-style:italic}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0}
+.case{background:var(--card);padding:16px 18px;border-radius:6px}
+.case b{display:block;margin-bottom:4px}.case small{color:var(--mute);display:block}
+.ka{color:var(--a)}.kb{color:var(--b)}
+.ctrl{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--rule);padding:12px max(5vw,16px);display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center}
+.ctrl label{display:flex;gap:10px;align-items:center;font-size:14px;flex:1 1 260px}
+.ctrl input{flex:1;accent-color:var(--a);height:44px}
+.ctrl output{font-variant-numeric:tabular-nums;min-width:11ch;font-weight:600}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:28px}
+.fig{position:relative;min-height:320px}.fig>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cap{font-size:14px;color:var(--mute);margin:6px 0 0}
+.leg{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;margin:6px 0}.leg span::before{content:"";display:inline-block;width:18px;height:0;border-top:3px solid var(--k);margin-right:6px;vertical-align:middle}.leg .d::before{border-top-style:dashed}.leg .o::before{border-top-style:dotted}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}td,th{padding:8px 10px;border-bottom:1px solid var(--rule);text-align:right;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{font-weight:600;font-size:13px;color:var(--mute)}
+.bar{display:flex;height:34px;border-radius:4px;overflow:hidden;margin:8px 0}.bar div{display:flex;align-items:center;padding:0 8px;font-size:13px;color:#fff;white-space:nowrap;overflow:hidden}
+.verdict{border-left:3px solid var(--a);padding:4px 0 4px 16px;margin:18px 0}
+.scroll{overflow-x:auto}
+@media(max-width:600px){table{font-size:13px}.eq{font-size:17px}}
+</style></head><body>
+
+<div class="band">
+<h1>The γ in your statistical factor comes from one assumption, and with standard relativity it cancels out</h1>
+<p class="lede">Your derivation adds γ to the exponent by taking E = γε out of the reservoir while keeping the reservoir's energy scale at mc² in the external frame. If you take out ε instead, or treat the multiplicity as frame-invariant (which standard relativity requires), γ drops out and the internal statistics do not change with common motion.</p>
+
+<div class="cases">
+<div class="case"><b class="ka">A · Your derivation</b><div class="eq"><i>Ω<sub>R</sub>/Ω<sub>0</sub></i> = e<sup>−γ<i>ε</i>/<i>mc</i>²</sup></div><small>Removes γε in the external frame, with ∂lnΩ/∂K = 1/mc² also taken in the external frame.</small></div>
+<div class="case"><b class="kb">B · Remove ε, not γε</b><div class="eq"><i>Ω<sub>R</sub>/Ω<sub>0</sub></i> = e<sup>−<i>ε</i>/<i>mc</i>²</sup></div><small>Same fixed scale, with the internal energy removed. No dependence on v. Equivalent to doing the whole derivation in the rest frame.</small></div>
+<div class="case"><b>C · Standard relativity</b><div class="eq"><i>Ω<sub>R</sub>/Ω<sub>0</sub></i> = e<sup>−γ<i>ε</i>/(γ<i>mc</i>²)</sup> = e<sup>−<i>ε</i>/<i>mc</i>²</sup></div><small>Removes γε in the external frame, but lnΩ counts microstates, so it is invariant. The external-frame scale therefore becomes γmc², and the γ cancels.</small></div>
+</div>
+</div>
+
+<div class="ctrl">
+<label>x = mv²/mc² <input id="sx" type="range" min="0" max="0.99" step="0.01" value="0.64"><output id="ox"></output></label>
+<label>ε / mc² <input id="se" type="range" min="0.05" max="3" step="0.05" value="1"><output id="oe"></output></label>
+</div>
+
+<div class="band">
+<h2>1 · Remaining multiplicity against ε</h2>
+<div class="leg"><span style="--k:var(--a)">A  e<sup>−γε/mc²</sup></span><span style="--k:var(--b)">B  e<sup>−ε/mc²</sup></span><span class="d" style="--k:var(--c)">C  standard SR</span></div>
+<div class="fig" id="f1"><svg></svg></div>
+<p class="cap">B and C lie on the same curve at every velocity. Only A responds to the slider, because the scale it divides by stays at mc² while the energy removed grows to γε.</p>
+
+<div class="scroll"><table id="tab"></table></div>
+
+<div class="grid2">
+<div><h2>2 · Effective energy scale</h2>
+<div class="leg"><span style="--k:var(--a)">A  𝓔<sub>v</sub>/𝓔<sub>0</sub> = 1/γ</span><span style="--k:var(--b)">B, C  = 1</span><span class="o" style="--k:var(--mute)">L/L<sub>0</sub></span></div>
+<div class="fig" id="f2"><svg></svg></div>
+<p class="cap">Case A matches L/L<sub>0</sub> exactly, but the match is built in. Multiplying the exponent by γ always gives a 1/γ scale. Nothing about length is used in getting there.</p></div>
+<div><h2>3 · Remaining multiplicity against x at fixed ε</h2>
+<div class="leg"><span style="--k:var(--a)">A</span><span style="--k:var(--b)">B, C</span></div>
+<div class="fig" id="f3"><svg></svg></div>
+<p class="cap">In case A, a moving system would be able to measure its own speed from the populations of its internal states. Case C rules this out, which is the principle of relativity.</p></div>
+</div>
+
+<h2>4 · Where γε goes, as seen from the external frame</h2>
+<p>When a system moving at a fixed v gains internal energy ε, its rest mass rises by ε/c². The external observer sees an energy increase of γε and a momentum increase of γvε/c². Only ε of that energy reorganises the inside. The rest is the kinetic energy needed to keep the added mass moving at v.</p>
+<div class="bar" id="bar"></div>
+<p class="cap" id="barcap"></p>
+
+<h2>5 · Is dilation increased, decreased or conserved?</h2>
+<p>That depends on where the energy comes from. There are three possibilities. Here M is the system's rest mass, and the plot uses the x set above as the starting speed.</p>
+<div class="leg"><span style="--k:var(--b)">(i) Co-moving reservoir: γ unchanged</span><span style="--k:var(--a)">(ii) Taken from the horizontal motion: γ₂ = γ₁/(1+ε/Mc²)</span></div>
+<div class="fig" id="f4"><svg></svg></div>
+<p class="cap">In (ii) the energy is taken from the horizontal motion and the momentum goes to an external body of very large mass. The line ends at γ = 1, where all of the kinetic energy (γ₁−1)Mc² has become internal energy.</p>
+<div class="verdict">
+<p><b>(i) Energy from a reservoir moving with the system.</b> v is held fixed, so γ does not change. Dilation is conserved and the internal populations are unchanged (case C). From outside, the internal transition rates are slowed by 1/γ, just as before the transfer.</p>
+<p><b>(ii) Energy taken from the horizontal motion.</b> This needs something outside the system to take up the momentum. The quantity conserved is γMc², so if the inside gains ε, γ has to fall: γ₂ = γ₁/(1+ε/Mc²). <b>Dilation is reduced</b>, and by exactly the amount that rest energy increased.</p>
+<p><b>(iii) Isolated system.</b> E and p are both conserved, so the invariant mass √(E²−p²c²)/c² is conserved. An isolated system cannot turn its own horizontal kinetic energy into internal reorganisation. ε = 0 and dilation is conserved trivially.</p>
+</div>
+
+<h2>Scope</h2>
+<p>All of your algebra, from step 1 through step 13, is correct once its premises are granted. The 1/γ comes from condition 3, which applies ∂lnΩ/∂K = 1/mc² to the reservoir in the external frame. Standard relativity treats entropy as invariant, so in that frame the slope becomes 1/(γmc²). Case A should therefore be read as a proposed departure from relativity. It makes a definite prediction, motion-dependent internal populations, which would show up in experiments on fast ions and particles. On scale: for an N₂ molecule, mc² is about 10¹² times k<sub>B</sub>T at room temperature, so at ordinary energies all three curves sit at ≈ 1.</p>
+</div>
+
+<script>
+{
+const $=id=>document.getElementById(id), sx=$('sx'), se=$('se');
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const g=x=>1/Math.sqrt(1-x);
+function chart(fig,opt){
+  const s=fig.querySelector('svg');
+  const draw=()=>{
+    const W=s.clientWidth,H=s.clientHeight,narrow=W<520,m={l:44,r:14,t:10,b:38};
+    const xd=typeof opt.xd=='function'?opt.xd():opt.xd,yd=typeof opt.yd=='function'?opt.yd():opt.yd;const [x0,x1]=xd,[y0,y1]=yd,X=v=>m.l+(v-x0)/(x1-x0)*(W-m.l-m.r),Y=v=>H-m.b-(v-y0)/(y1-y0)*(H-m.t-m.b);
+    const mute=css('--mute'),rule=css('--rule');let o='';
+    const nt=narrow?3:5;
+    for(let i=0;i<=nt;i++){const yv=y0+(y1-y0)*i/nt;o+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(yv)}" y2="${Y(yv)}" stroke="${rule}"/><text x="${m.l-6}" y="${Y(yv)+4}" text-anchor="end" font-size="12" fill="${mute}">${+yv.toFixed(2)}</text>`;
+      const xv=x0+(x1-x0)*i/nt;o+=`<text x="${X(xv)}" y="${H-m.b+16}" text-anchor="middle" font-size="12" fill="${mute}">${+xv.toFixed(2)}</text>`}
+    o+=`<text x="${(W+m.l)/2}" y="${H-4}" text-anchor="middle" font-size="13" fill="${mute}">${opt.xl}</text>`;
+    for(const sr of opt.series()){
+      const pts=[];const [a,b]=sr.dom||xd;for(let i=0;i<=200;i++){const xv=a+(b-a)*i/200;pts.push(X(xv).toFixed(1)+','+Y(Math.min(y1,Math.max(y0,sr.f(xv)))).toFixed(1))}
+      o+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${css(sr.k)}" stroke-width="${sr.w||2.5}" ${sr.dash?`stroke-dasharray="${sr.dash}"`:''}/>`;
+    }
+    for(const p of (opt.marks?opt.marks():[])) o+=`<line x1="${X(p.x)}" x2="${X(p.x)}" y1="${m.t}" y2="${H-m.b}" stroke="${mute}" stroke-dasharray="2 4"/><text x="${X(p.x)+5}" y="${m.t+12}" font-size="12" fill="${mute}">${p.t}</text>`;
+    s.innerHTML=o;};
+  const ro=new ResizeObserver(draw);ro.observe(s);return draw;
+}
+const f1=chart($('f1'),{xd:[0,3],yd:[0,1],xl:'ε / mc²',series:()=>{const G=g(+sx.value);return[{k:'--a',f:e=>Math.exp(-G*e)},{k:'--b',f:e=>Math.exp(-e)},{k:'--c',f:e=>Math.exp(-G*e/G),dash:'6 6',w:1.6}]},marks:()=>[{x:+se.value,t:'ε'}]});
+const f2=chart($('f2'),{xd:[0,0.99],yd:[0,1.05],xl:'x = mv²/mc²',series:()=>[{k:'--b',f:()=>1},{k:'--a',f:x=>1/g(x)},{k:'--mute',f:x=>Math.sqrt(1-x),dash:'1 5',w:3}],marks:()=>[{x:+sx.value,t:'x'}]});
+const f3=chart($('f3'),{xd:[0,0.99],yd:[0,1],xl:'x = mv²/mc²',series:()=>{const e=+se.value;return[{k:'--b',f:()=>Math.exp(-e)},{k:'--a',f:x=>Math.exp(-g(x)*e)}]},marks:()=>[{x:+sx.value,t:'x'}]});
+const f4=chart($('f4'),{xd:()=>[0,Math.max(0.2,g(+sx.value)-1)],yd:()=>[1,Math.max(1.2,g(+sx.value)*1.08)],xl:'ε / Mc²  (internal energy gained)',series:()=>{const G=g(+sx.value);return[{k:'--b',f:()=>G},{k:'--a',f:e=>G/(1+e),dom:[0,Math.max(0.2,G-1)]}]}});
+function upd(){
+  const x=+sx.value,e=+se.value,G=g(x),b=Math.sqrt(x);
+  $('ox').textContent=`${x.toFixed(2)}  (v = ${b.toFixed(3)}c)`;$('oe').textContent=e.toFixed(2);
+  const A=Math.exp(-G*e),B=Math.exp(-e);
+  $('tab').innerHTML=`<tr><th>at x = ${x.toFixed(2)}, ε = ${e.toFixed(2)} mc²</th><th>γ</th><th>Energy removed (ext.)</th><th>Scale used</th><th>Ω<sub>R</sub>/Ω<sub>0</sub></th></tr>
+  <tr><td class="ka">A · your derivation</td><td>${G.toFixed(4)}</td><td>${(G*e).toFixed(3)} mc²</td><td>mc²</td><td>${(A*100).toFixed(2)}%</td></tr>
+  <tr><td class="kb">B · remove ε</td><td>${G.toFixed(4)}</td><td>${e.toFixed(3)} mc²</td><td>mc²</td><td>${(B*100).toFixed(2)}%</td></tr>
+  <tr><td>C · standard SR</td><td>${G.toFixed(4)}</td><td>${(G*e).toFixed(3)} mc²</td><td>${G.toFixed(3)} mc²</td><td>${(B*100).toFixed(2)}%</td></tr>`;
+  const ki=1/G*100;
+  $('bar').innerHTML=`<div style="width:${ki}%;background:var(--b)">internal ε</div><div style="width:${100-ki}%;background:var(--a)">(γ−1)ε bulk KE</div>`;
+  $('barcap').textContent=`At x = ${x.toFixed(2)}: γε = ${(G*e).toFixed(3)} mc², of which ε = ${e.toFixed(3)} mc² is internal and (γ−1)ε = ${((G-1)*e).toFixed(3)} mc² is horizontal kinetic energy of the added mass. The momentum also rises by γvε/c² = ${(G*b*e).toFixed(3)} mc.`;
+  f1();f2();f3();f4();
+}
+sx.addEventListener('input',upd);se.addEventListener('input',upd);
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',upd);
+new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+upd();
+}
+</script>
+</body></html>
